@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
-ARG SDK_VERSION
-ARG EMULATOR_ARCH
+ARG SDK_VERSION=30
+ARG EMULATOR_ARCH=x86_64
 
 # -------------------- Common -------------------
 # net-tools             basic network primitives
@@ -76,9 +76,7 @@ COPY prepare_snapshot.sh adb_redirect.sh run_emulator.sh entrypoint.sh /
 
 # https://developer.android.com/studio/command-line/adb#howadbworks
 # 5037 - ADB server port
-# 5554 - Console port
-# 5555 - ADB
+# 5554,5556,5558 etc - Console port
+# 5555,5557,5559 etc - ADB
 # 5900 - VNC
-EXPOSE 5037 5554 5555 5900
-
-CMD ["/entrypoint.sh"]
+EXPOSE 5037 5554-5682
